@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -191,12 +190,11 @@ func GetDirectionDesc(degrees int64) string {
 	}
 }
 
-func FormatICAO(icao string) string {
+func FormatICAO(icao string) (string, error) {
 	len := len(icao)
 
 	if len < 3 || len > 4 {
-		fmt.Println("Invalid airport code:", icao)
-		os.Exit(1)
+		return icao, fmt.Errorf("Invalid airport code: %s", icao)
 	}
 
 	icao = strings.ToUpper(icao)
@@ -204,7 +202,7 @@ func FormatICAO(icao string) string {
 		icao = "K" + icao
 	}
 
-	return icao
+	return icao, nil
 }
 
 func cToF(c float64) float64 {
