@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
-	"time"
 )
 
 const (
@@ -66,7 +65,7 @@ var cloudTypes = map[string]string{
 
 // FetchMetar fetches the current METAR for given station represented by a valid ICAO airport code.
 func FetchMetar(station string) *MetarResponse {
-	start := time.Now()
+	//start := time.Now()
 	url := baseURL + station + options
 
 	metarResp := new(MetarResponse)
@@ -92,7 +91,7 @@ func FetchMetar(station string) *MetarResponse {
 	}
 	decodeMetar(&metar)
 	metarResp.Metar = metar
-	fmt.Printf("\nFetched: %s in %.2fs\n", station, time.Since(start).Seconds())
+	//fmt.Printf("\nFetched: %s in %.2fs\n", station, time.Since(start).Seconds())
 	return metarResp
 }
 
